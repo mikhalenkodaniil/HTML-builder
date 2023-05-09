@@ -15,6 +15,7 @@ const rl = readline.createInterface({
 let writeableStream = fs.createWriteStream('./02-write-file/text.txt');
 rec();
 function rec(){
+
     rl.question('Введите ваш текст\n', (answer) => {
         if(answer == 'exit'){
             rl.close();
@@ -24,3 +25,8 @@ function rec(){
     }
       });
 }
+process.on('beforeExit', () => {
+    console.log(
+      'Запись текста окончена',
+    );
+  });
