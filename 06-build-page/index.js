@@ -60,9 +60,19 @@ fs.readFile('./06-build-page/template.html', (err, data) =>{
                 if(err) console.log('err');
                 let c = '{{header}}';
                 k = k.replace(c,data);
-                fs.writeFile('./06-build-page/project-dist/index.html', k, (err) => {
-                    if(err) console.log('err');
-                });
+                let d = '{{about}}';
+                if(k.indexOf(d, k) == -1){
+                    fs.writeFile('./06-build-page/project-dist/index.html', k, (err) => {
+                        if(err) console.log('err');
+                    });
+                } else {
+                    fs.readFile('./06-build-page/components/about.html', (err, data) => {
+                        k = k.replace(d,data);
+                        fs.writeFile('./06-build-page/project-dist/index.html', k, (err) => {
+                            if(err) console.log('err');
+                        });
+                    });
+                };
             });
         });
     });
